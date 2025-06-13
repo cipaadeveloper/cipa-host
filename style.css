@@ -1,0 +1,225 @@
+:root {
+  --bg: #0f0f0f;
+  --card: #1c1c1e;
+  --text: #ffffff;
+  --btn: #ff7f50;
+  --btn-hover: #ff6347;
+  --modal-bg: rgba(0, 0, 0, 0.7);
+  --accent: #00d1b2;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #f9f9f9;
+    --card: #ffffff;
+    --text: #111;
+    --btn: #4CAF50;
+    --btn-hover: #45a049;
+    --modal-bg: rgba(0, 0, 0, 0.4);
+    --accent: #00a6a6;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: all 0.3s ease-in-out;
+}
+
+header {
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+header p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.keranjang {
+  position: relative;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.keranjang::after {
+  content: attr(data-count);
+  background: var(--accent);
+  color: white;
+  font-size: 12px;
+  padding: 2px 6px;
+  border-radius: 50%;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.produk-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 30px;
+}
+
+.produk {
+  background: var(--card);
+  border-radius: 16px;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+  padding: 20px;
+  width: 280px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+}
+
+.produk:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.2);
+}
+
+.produk img {
+  max-width: 100%;
+  border-radius: 12px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.produk h3 {
+  font-size: 20px;
+  margin: 0 0 10px;
+}
+
+.produk p {
+  font-size: 16px;
+  margin: 0 0 15px;
+}
+
+.btn {
+  display: inline-block;
+  background: var(--btn);
+  color: white;
+  padding: 10px 16px;
+  margin: 6px 4px 0;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover {
+  background: var(--btn-hover);
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transform: scale(0);
+  animation: ripple-effect 0.6s linear;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes ripple-effect {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Modal Styling */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: var(--modal-bg);
+}
+
+.modal-content {
+  background-color: var(--card);
+  margin: 10% auto;
+  padding: 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  color: var(--text);
+  animation: fadeIn 0.3s ease-in-out;
+  position: relative;
+}
+
+.close {
+  color: var(--text);
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.close:hover {
+  color: var(--accent);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .produk {
+    width: 100%;
+    max-width: 350px;
+  }
+
+  .btn {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
