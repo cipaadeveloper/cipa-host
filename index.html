@@ -22,74 +22,235 @@
       color: var(--text);
     }
 
-    header, .produk-container {
-      display: none;
-    }
-
-    #welcome-screen {
+    .welcome {
+      height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      background: var(--bg);
       text-align: center;
     }
 
-    #welcome-screen h1 {
-      font-size: 28px;
+    .welcome h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
     }
 
-    #welcome-screen p {
+    .welcome p {
       font-size: 16px;
-      color: #666;
+      margin-bottom: 20px;
     }
 
-    #welcome-screen button {
+    .welcome button {
       background: var(--btn);
       color: white;
       padding: 10px 20px;
       border: none;
       border-radius: 10px;
-      margin-top: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .welcome button:hover {
+      background: var(--btn-hover);
+    }
+
+    header {
+      background: #ffc1cc;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      color: #fff;
+    }
+
+    .keranjang {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 12px;
+      font-weight: bold;
+      background: var(--card);
+      padding: 6px 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .produk-container {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px;
+      gap: 20px;
+    }
+
+    .produk {
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      width: 280px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .produk:hover {
+      transform: translateY(-5px);
+    }
+
+    .produk img {
+      max-width: 100%;
+      max-height: 140px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .produk h3 {
+      margin: 12px 0 8px;
+      font-size: 20px;
+    }
+
+    .produk p {
+      font-size: 16px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--btn);
+      color: white;
+      padding: 10px 15px;
+      margin: 8px 5px 0 5px;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: background 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--btn-hover);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: var(--modal-bg);
+    }
+
+    .modal-content {
+      background-color: var(--card);
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      color: var(--text);
+      position: relative;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
       font-weight: bold;
       cursor: pointer;
     }
 
-    /* (sisa style sama seperti sebelumnya)... */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .total-harga {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .checkout {
+      display: inline-block;
+      margin-top: 10px;
+      background: var(--btn);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .checkout:hover {
+      background: var(--btn-hover);
+    }
   </style>
 </head>
 <body>
-  <!-- Welcome Screen -->
-  <div id="welcome-screen">
-    <h1>Welcome to Store Cipa</h1>
+  <div class="welcome" id="welcome">
+    <h1>Selamat datang di Cipa Store</h1>
     <p>Toko penyedia produk digital & panel hosting</p>
-    <button onclick="masukToko()">Masuk Toko</button>
+    <button onclick="showStore()">Masuk ke Toko</button>
   </div>
 
-  <!-- Header & Toko -->
-  <header>
-    <h1>Toko Cipa Hosting</h1>
-    <p>Jual produk digital & fisik via WhatsApp</p>
-    <div class="keranjang">
-      🛒 <span id="keranjangCount">0</span> item<br />
-      💰 Total: Rp<span id="totalHarga">0</span><br />
-      <div class="checkout" onclick="checkout()">Checkout</div>
-    </div>
-  </header>
+  <div id="storeContent" style="display:none;">
+    <header>
+      <h1>Toko Cipa Hosting</h1>
+      <p>Jual produk digital & fisik via WhatsApp</p>
+      <div class="keranjang">
+        🛒 <span id="keranjangCount">0</span> item<br />
+        💰 Total: Rp<span id="totalHarga">0</span><br />
+        <div class="checkout" onclick="checkout()">Checkout</div>
+      </div>
+    </header>
 
-  <div class="produk-container">
-    <!-- Produk-produk seperti sebelumnya -->
-    <!-- contoh: -->
-    <div class="produk">
-      <img src="https://img1.pixhost.to/images/6453/610545685_imgtmp.jpg" />
-      <h3>Reseller Panel</h3>
-      <p>Rp5.000</p>
-      <button class="btn" onclick="showModal('Reseller Panel', 'Bisa jualan panel!')">Lihat Detail</button>
-      <button class="btn" onclick="tambahKeranjang(5000)">+ Keranjang</button>
-      <a class="btn" href="https://wa.me/6288293058238?text=Saya%20ingin%20beli%20Reseller%20Panel">Beli</a>
+    <div class="produk-container" id="produkContainer">
+      <div class="produk">
+        <img src="https://img1.pixhost.to/images/6453/610545685_imgtmp.jpg" alt="Bot WhatsApp" />
+        <h3>Reseller Panel</h3>
+        <p>Rp5.000</p>
+        <button class="btn" onclick="showModal('Reseller Panel', 'Bisa jualan panel!')">Lihat Detail</button>
+        <button class="btn" onclick="tambahKeranjang(5000)">+ Keranjang</button>
+        <a class="btn" href="https://wa.me/6288293058238?text=Saya%20ingin%20beli%20Reseller%20Panel" target="_blank">Beli</a>
+      </div>
+      <div class="produk">
+        <img src="https://img1.pixhost.to/images/6453/610545685_imgtmp.jpg" alt="Admin Panel" />
+        <h3>Admin Panel</h3>
+        <p>Rp10.000</p>
+        <button class="btn" onclick="showModal('Admin Panel', 'Panel admin untuk kelola layanan')">Lihat Detail</button>
+        <button class="btn" onclick="tambahKeranjang(10000)">+ Keranjang</button>
+        <a class="btn" href="https://wa.me/6288293058238?text=Saya%20ingin%20beli%20Admin%20Panel" target="_blank">Beli</a>
+      </div>
+      <div class="produk">
+        <img src="https://img1.pixhost.to/images/6453/610545685_imgtmp.jpg" alt="Owner Panel" />
+        <h3>Owner Panel</h3>
+        <p>Rp20.000</p>
+        <button class="btn" onclick="showModal('Owner Panel', 'Fitur lengkap untuk pemilik panel')">Lihat Detail</button>
+        <button class="btn" onclick="tambahKeranjang(20000)">+ Keranjang</button>
+        <a class="btn" href="https://wa.me/6288293058238?text=Saya%20ingin%20beli%20Owner%20Panel" target="_blank">Beli</a>
+      </div>
+      <div class="produk">
+        <img src="https://img1.pixhost.to/images/6453/610545685_imgtmp.jpg" alt="PT Panel" />
+        <h3>PT Panel</h3>
+        <p>Rp25.000</p>
+        <button class="btn" onclick="showModal('PT Panel', 'Panel premium untuk perusahaan atau tim')">Lihat Detail</button>
+        <button class="btn" onclick="tambahKeranjang(25000)">+ Keranjang</button>
+        <a class="btn" href="https://wa.me/6288293058238?text=Saya%20ingin%20beli%20PT%20Panel" target="_blank">Beli</a>
+      </div>
     </div>
-
-    <!-- Produk lainnya menyusul... -->
   </div>
 
   <!-- Modal -->
@@ -102,16 +263,6 @@
   </div>
 
   <script>
-    // Tampilkan toko setelah tombol diklik
-    function masukToko() {
-      document.getElementById('welcome-screen').style.display = 'none';
-      document.querySelector('header').style.display = 'block';
-      document.querySelector('.produk-container').style.display = 'flex';
-    }
-
-    // Otomatis masuk toko setelah 3 detik (bisa dihilangkan kalau ingin manual)
-    setTimeout(masukToko, 3000);
-
     let keranjang = 0;
     let total = 0;
 
@@ -142,6 +293,12 @@
 
     function tutupModal() {
       document.getElementById('detailModal').style.display = 'none';
+    }
+
+    function showStore() {
+      document.getElementById('welcome').style.display = 'none';
+      document.getElementById('storeContent').style.display = 'block';
+      document.getElementById('produkContainer').style.display = 'flex';
     }
 
     window.onclick = function (event) {
