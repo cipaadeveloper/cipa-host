@@ -39,7 +39,7 @@
       backdrop-filter: blur(8px);
       padding: 20px;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .keranjang {
@@ -50,7 +50,7 @@
       background: var(--card);
       padding: 10px 15px;
       border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .produk-container {
@@ -64,18 +64,23 @@
     .produk {
       background: var(--card);
       border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-      padding: 20px 15px;
-      width: 260px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      padding: 15px;
+      width: 280px;
       text-align: center;
       transition: transform 0.2s ease;
       position: relative;
       overflow: hidden;
-      min-height: 200px;
     }
 
     .produk:hover {
       transform: translateY(-5px);
+    }
+
+    .produk img {
+      max-width: 100%;
+      border-radius: 10px;
+      height: auto;
     }
 
     .produk h3 {
@@ -98,7 +103,7 @@
       border-radius: 6px;
       text-decoration: none;
       font-weight: bold;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       transition: background 0.2s ease;
       cursor: pointer;
       position: relative;
@@ -109,7 +114,6 @@
       background: var(--btn-hover);
     }
 
-    /* Modal & Ripple */
     .ripple {
       position: absolute;
       border-radius: 50%;
@@ -162,8 +166,14 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(-20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .total-harga {
@@ -187,96 +197,96 @@
   </style>
 </head>
 <body>
+  <header>
+    <h1>Toko Cipa Hosting</h1>
+    <p>Jual produk digital & fisik via WhatsApp</p>
+    <div class="keranjang">
+      🛒 <span id="keranjangCount">0</span> item<br />
+      💰 Total: Rp<span id="totalHarga">0</span><br />
+      <div class="checkout" onclick="checkout()">Checkout</div>
+    </div>
+  </header>
 
-<header>
-  <h1>Toko Cipa Hosting</h1>
-  <p>Jual produk digital & fisik via WhatsApp</p>
-  <div class="keranjang">
-    🛒 <span id="keranjangCount">0</span> item<br/>
-    💰 Total: Rp<span id="totalHarga">0</span><br/>
-    <div class="checkout" onclick="checkout()">Checkout</div>
+  <div class="produk-container">
+    <div class="produk">
+      <img src="https://img1.pixhost.to/images/6453/610545685_imgtmp.jpg" alt="Reseller Panel" />
+      <h3>Reseller Panel</h3>
+      <p>Rp5.000</p>
+      <button class="btn" onclick="showModal('Reseller Panel', 'Paket untuk jualan panel sendiri.', event)">Lihat Detail</button>
+      <button class="btn" onclick="tambahKeranjang(5000)">+ Keranjang</button>
+      <a class="btn" href="https://wa.me/6281234567890?text=Saya%20ingin%20beli%20Reseller%20Panel" target="_blank">Beli</a>
+    </div>
+
+    <div class="produk">
+      <img src="https://img1.pixhost.to/images/6453/610545685_imgtmp.jpg" />
+      <h3>Admin Panel</h3>
+      <p>Rp10.000</p>
+      <button class="btn" onclick="showModal('Admin Panel', 'Paket akses penuh admin hosting.', event)">Lihat Detail</button>
+      <button class="btn" onclick="tambahKeranjang(10000)">+ Keranjang</button>
+      <a class="btn" href="https://wa.me/6281234567890?text=Saya%20ingin%20beli%20Admin%20Panel" target="_blank">Beli</a>
+    </div>
   </div>
-</header>
 
-<div class="produk-container">
-  <div class="produk">
-    <h3>Reseller Panel</h3>
-    <p>Rp5.000</p>
-    <button class="btn" onclick="showModal('Reseller Panel', 'Paket untuk jualan panel sendiri.', event)">Lihat Detail</button>
-    <button class="btn" onclick="tambahKeranjang(5000)">+ Keranjang</button>
-    <a class="btn" href="https://wa.me/6281234567890?text=Saya%20ingin%20beli%20Reseller%20Panel" target="_blank">Beli</a>
+  <!-- Modal -->
+  <div id="detailModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="tutupModal()">✕</span>
+      <h2 id="modalTitle">Judul Produk</h2>
+      <p id="modalDesc">Deskripsi produk...</p>
+    </div>
   </div>
 
-  <div class="produk">
-    <h3>Admin Panel</h3>
-    <p>Rp10.000</p>
-    <button class="btn" onclick="showModal('Admin Panel', 'Paket akses penuh admin hosting.', event)">Lihat Detail</button>
-    <button class="btn" onclick="tambahKeranjang(10000)">+ Keranjang</button>
-    <a class="btn" href="https://wa.me/6281234567890?text=Saya%20ingin%20beli%20Admin%20Panel" target="_blank">Beli</a>
-  </div>
-</div>
+  <script>
+    let keranjang = 0;
+    let total = 0;
 
-<!-- Modal -->
-<div id="detailModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="tutupModal()">✕</span>
-    <h2 id="modalTitle">Judul Produk</h2>
-    <p id="modalDesc">Deskripsi produk...</p>
-  </div>
-</div>
-
-<script>
-  let keranjang = 0;
-  let total = 0;
-
-  function tambahKeranjang(harga) {
-    keranjang++;
-    total += harga;
-    document.getElementById('keranjangCount').textContent = keranjang;
-    document.getElementById('totalHarga').textContent = total.toLocaleString('id-ID');
-  }
-
-  function checkout() {
-    if (keranjang === 0) {
-      alert("Keranjang masih kosong.");
-    } else {
-      alert(`Checkout berhasil!\nTotal item: ${keranjang}\nTotal harga: Rp${total.toLocaleString('id-ID')}`);
-      keranjang = 0;
-      total = 0;
+    function tambahKeranjang(harga) {
+      keranjang++;
+      total += harga;
       document.getElementById('keranjangCount').textContent = keranjang;
-      document.getElementById('totalHarga').textContent = total;
+      document.getElementById('totalHarga').textContent = total.toLocaleString('id-ID');
     }
-  }
 
-  function showModal(title, desc, event) {
-    rippleEffect(event);
-    document.getElementById('modalTitle').textContent = title;
-    document.getElementById('modalDesc').textContent = desc;
-    document.getElementById('detailModal').style.display = 'block';
-  }
-
-  function tutupModal() {
-    document.getElementById('detailModal').style.display = 'none';
-  }
-
-  window.onclick = function(event) {
-    const modal = document.getElementById('detailModal');
-    if (event.target === modal) {
-      modal.style.display = 'none';
+    function checkout() {
+      if (keranjang === 0) {
+        alert("Keranjang masih kosong.");
+      } else {
+        alert(`Checkout berhasil!\nTotal item: ${keranjang}\nTotal harga: Rp${total.toLocaleString('id-ID')}`);
+        keranjang = 0;
+        total = 0;
+        document.getElementById('keranjangCount').textContent = keranjang;
+        document.getElementById('totalHarga').textContent = total;
+      }
     }
-  }
 
-  function rippleEffect(e) {
-    const btn = e.currentTarget;
-    const ripple = document.createElement("span");
-    ripple.classList.add("ripple");
-    const rect = btn.getBoundingClientRect();
-    ripple.style.left = `${e.clientX - rect.left}px`;
-    ripple.style.top = `${e.clientY - rect.top}px`;
-    btn.appendChild(ripple);
-    setTimeout(() => ripple.remove(), 600);
-  }
-</script>
+    function showModal(title, desc, event) {
+      rippleEffect(event);
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalDesc').textContent = desc;
+      document.getElementById('detailModal').style.display = 'block';
+    }
 
+    function tutupModal() {
+      document.getElementById('detailModal').style.display = 'none';
+    }
+
+    window.onclick = function (event) {
+      const modal = document.getElementById('detailModal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    };
+
+    function rippleEffect(e) {
+      const btn = e.currentTarget;
+      const ripple = document.createElement("span");
+      ripple.classList.add("ripple");
+      const rect = btn.getBoundingClientRect();
+      ripple.style.left = `${e.clientX - rect.left}px`;
+      ripple.style.top = `${e.clientY - rect.top}px`;
+      btn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+    }
+  </script>
 </body>
 </html>
