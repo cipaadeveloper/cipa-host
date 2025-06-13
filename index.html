@@ -65,22 +65,17 @@
       background: var(--card);
       border-radius: 12px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-      padding: 15px;
-      width: 280px;
+      padding: 20px 15px;
+      width: 260px;
       text-align: center;
       transition: transform 0.2s ease;
       position: relative;
       overflow: hidden;
+      min-height: 200px;
     }
 
     .produk:hover {
       transform: translateY(-5px);
-    }
-
-    .produk img {
-      max-width: 100%;
-      border-radius: 10px;
-      height: auto;
     }
 
     .produk h3 {
@@ -205,7 +200,6 @@
 
 <div class="produk-container">
   <div class="produk">
-    <img src="https://img1.pixhost.to/images/6273/607679785_uploaded-image.jpg" alt="Reseller Panel" />
     <h3>Reseller Panel</h3>
     <p>Rp5.000</p>
     <button class="btn" onclick="showModal('Reseller Panel', 'Paket untuk jualan panel sendiri.', event)">Lihat Detail</button>
@@ -214,7 +208,6 @@
   </div>
 
   <div class="produk">
-    <img src="https://images.unsplash.com/photo-1585386954564-3b2744b3b7ee?auto=format&fit=crop&w=600&q=80" alt="Admin Panel" />
     <h3>Admin Panel</h3>
     <p>Rp10.000</p>
     <button class="btn" onclick="showModal('Admin Panel', 'Paket akses penuh admin hosting.', event)">Lihat Detail</button>
@@ -248,7 +241,6 @@
       alert("Keranjang masih kosong.");
     } else {
       alert(`Checkout berhasil!\nTotal item: ${keranjang}\nTotal harga: Rp${total.toLocaleString('id-ID')}`);
-      // Reset jika ingin kosongkan keranjang:
       keranjang = 0;
       total = 0;
       document.getElementById('keranjangCount').textContent = keranjang;
