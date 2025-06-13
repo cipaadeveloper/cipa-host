@@ -62,6 +62,8 @@
       width: 280px;
       text-align: center;
       transition: transform 0.2s ease;
+      position: relative;
+      overflow: hidden;
     }
 
     .produk:hover {
@@ -97,10 +99,30 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       transition: background 0.2s ease;
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
 
     .btn:hover {
       background: var(--btn-hover);
+    }
+
+    /* Ripple Effect */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(0);
+      animation: ripple-effect 0.6s linear;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes ripple-effect {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
     }
 
     /* Modal */
@@ -147,7 +169,7 @@
 <body>
 
 <header>
-  <h1>Toko Online Saya</h1>
+  <h1>Toko Cipa Gostingr</h1>
   <p>Jualan produk digital & fisik langsung via WhatsApp</p>
   <div class="keranjang">🛒 Keranjang: <span id="keranjangCount">0</span> item</div>
 </header>
@@ -157,7 +179,7 @@
     <img src="https://images.unsplash.com/photo-1585386959984-a41552263f5c?auto=format&fit=crop&w=600&q=80" alt="Kaos Polos" />
     <h3>Kaos Polos Premium</h3>
     <p>Rp50.000</p>
-    <button class="btn" onclick="showModal('Kaos Polos Premium', 'Kaos polos berbahan cotton combed 30s, nyaman dipakai harian dan tidak mudah luntur.')">Lihat Detail</button>
+    <button class="btn" onclick="showModal('Kaos Polos Premium', 'Kaos polos berbahan cotton combed 30s, nyaman dipakai harian dan tidak mudah luntur.', event)">Lihat Detail</button>
     <button class="btn" onclick="tambahKeranjang()">+ Keranjang</button>
     <a class="btn" href="https://wa.me/6281234567890?text=Saya%20ingin%20beli%20Kaos%20Polos" target="_blank">Beli</a>
   </div>
@@ -166,7 +188,7 @@
     <img src="https://images.unsplash.com/photo-1585386954564-3b2744b3b7ee?auto=format&fit=crop&w=600&q=80" alt="Headphone" />
     <h3>Headphone Bass Boost</h3>
     <p>Rp75.000</p>
-    <button class="btn" onclick="showModal('Headphone Bass Boost', 'Headphone dengan suara bass nendang, cocok untuk gaming dan musik. Nyaman dipakai lama.')">Lihat Detail</button>
+    <button class="btn" onclick="showModal('Headphone Bass Boost', 'Headphone dengan suara bass nendang, cocok untuk gaming dan musik. Nyaman dipakai lama.', event)">Lihat Detail</button>
     <button class="btn" onclick="tambahKeranjang()">+ Keranjang</button>
     <a class="btn" href="https://wa.me/6281234567890?text=Saya%20ingin%20beli%20Headphone" target="_blank">Beli</a>
   </div>
@@ -183,12 +205,14 @@
 
 <script>
   let keranjang = 0;
+
   function tambahKeranjang() {
     keranjang++;
     document.getElementById('keranjangCount').textContent = keranjang;
   }
 
-  function showModal(title, desc) {
+  function showModal(title, desc, event) {
+    rippleEffect(event); // Efek gelombang
     document.getElementById('modalTitle').textContent = title;
     document.getElementById('modalDesc').textContent = desc;
     document.getElementById('detailModal').style.display = 'block';
@@ -203,6 +227,17 @@
     if (event.target === modal) {
       modal.style.display = 'none';
     }
+  }
+
+  function rippleEffect(e) {
+    const btn = e.currentTarget;
+    const ripple = document.createElement("span");
+    ripple.classList.add("ripple");
+    const rect = btn.getBoundingClientRect();
+    ripple.style.left = `${e.clientX - rect.left}px`;
+    ripple.style.top = `${e.clientY - rect.top}px`;
+    btn.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 600);
   }
 </script>
 
