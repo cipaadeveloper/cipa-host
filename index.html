@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Toko Online Saya</title>
+  <title>Toko Cipa Hosting</title>
   <style>
     :root {
       --bg: #121212;
@@ -34,6 +34,7 @@
     }
 
     header {
+      position: relative;
       background: rgba(0, 0, 0, 0.2);
       backdrop-filter: blur(8px);
       padding: 20px;
@@ -42,8 +43,14 @@
     }
 
     .keranjang {
-      margin-top: 10px;
+      position: absolute;
+      top: 20px;
+      right: 20px;
       font-weight: bold;
+      background: var(--card);
+      padding: 10px 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
     .produk-container {
@@ -107,7 +114,7 @@
       background: var(--btn-hover);
     }
 
-    /* Ripple Effect */
+    /* Modal & Ripple */
     .ripple {
       position: absolute;
       border-radius: 50%;
@@ -125,7 +132,6 @@
       }
     }
 
-    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -164,33 +170,56 @@
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
+    .total-harga {
+      margin-top: 10px;
+      font-size: 16px;
+    }
+
+    .checkout {
+      display: inline-block;
+      margin-top: 10px;
+      background: var(--btn);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .checkout:hover {
+      background: var(--btn-hover);
+    }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Toko Cipa Gostingr</h1>
-  <p>Jualan produk digital & fisik langsung via WhatsApp</p>
-  <div class="keranjang">🛒 Keranjang: <span id="keranjangCount">0</span> item</div>
+  <h1>Toko Cipa Hosting</h1>
+  <p>Jual produk digital & fisik via WhatsApp</p>
+  <div class="keranjang">
+    🛒 <span id="keranjangCount">0</span> item<br/>
+    💰 Total: Rp<span id="totalHarga">0</span><br/>
+    <div class="checkout" onclick="checkout()">Checkout</div>
+  </div>
 </header>
 
 <div class="produk-container">
   <div class="produk">
-    <img src="https://images.unsplash.com/photo-1585386959984-a41552263f5c?auto=format&fit=crop&w=600&q=80" alt="Kaos Polos" />
-    <h3>Kaos Polos Premium</h3>
-    <p>Rp50.000</p>
-    <button class="btn" onclick="showModal('Kaos Polos Premium', 'Kaos polos berbahan cotton combed 30s, nyaman dipakai harian dan tidak mudah luntur.', event)">Lihat Detail</button>
-    <button class="btn" onclick="tambahKeranjang()">+ Keranjang</button>
-    <a class="btn" href="https://wa.me/6281234567890?text=Saya%20ingin%20beli%20Kaos%20Polos" target="_blank">Beli</a>
+    <img src="https://images.unsplash.com/photo-1585386959984-a41552263f5c?auto=format&fit=crop&w=600&q=80" alt="Reseller Panel" />
+    <h3>Reseller Panel</h3>
+    <p>Rp5.000</p>
+    <button class="btn" onclick="showModal('Reseller Panel', 'Paket untuk jualan panel sendiri.', event)">Lihat Detail</button>
+    <button class="btn" onclick="tambahKeranjang(5000)">+ Keranjang</button>
+    <a class="btn" href="https://wa.me/6281234567890?text=Saya%20ingin%20beli%20Reseller%20Panel" target="_blank">Beli</a>
   </div>
 
   <div class="produk">
-    <img src="https://images.unsplash.com/photo-1585386954564-3b2744b3b7ee?auto=format&fit=crop&w=600&q=80" alt="Headphone" />
-    <h3>Headphone Bass Boost</h3>
-    <p>Rp75.000</p>
-    <button class="btn" onclick="showModal('Headphone Bass Boost', 'Headphone dengan suara bass nendang, cocok untuk gaming dan musik. Nyaman dipakai lama.', event)">Lihat Detail</button>
-    <button class="btn" onclick="tambahKeranjang()">+ Keranjang</button>
-    <a class="btn" href="https://wa.me/6281234567890?text=Saya%20ingin%20beli%20Headphone" target="_blank">Beli</a>
+    <img src="https://images.unsplash.com/photo-1585386954564-3b2744b3b7ee?auto=format&fit=crop&w=600&q=80" alt="Admin Panel" />
+    <h3>Admin Panel</h3>
+    <p>Rp10.000</p>
+    <button class="btn" onclick="showModal('Admin Panel', 'Paket akses penuh admin hosting.', event)">Lihat Detail</button>
+    <button class="btn" onclick="tambahKeranjang(10000)">+ Keranjang</button>
+    <a class="btn" href="https://wa.me/6281234567890?text=Saya%20ingin%20beli%20Admin%20Panel" target="_blank">Beli</a>
   </div>
 </div>
 
@@ -205,14 +234,30 @@
 
 <script>
   let keranjang = 0;
+  let total = 0;
 
-  function tambahKeranjang() {
+  function tambahKeranjang(harga) {
     keranjang++;
+    total += harga;
     document.getElementById('keranjangCount').textContent = keranjang;
+    document.getElementById('totalHarga').textContent = total.toLocaleString('id-ID');
+  }
+
+  function checkout() {
+    if (keranjang === 0) {
+      alert("Keranjang masih kosong.");
+    } else {
+      alert(`Checkout berhasil!\nTotal item: ${keranjang}\nTotal harga: Rp${total.toLocaleString('id-ID')}`);
+      // Reset jika ingin kosongkan keranjang:
+      keranjang = 0;
+      total = 0;
+      document.getElementById('keranjangCount').textContent = keranjang;
+      document.getElementById('totalHarga').textContent = total;
+    }
   }
 
   function showModal(title, desc, event) {
-    rippleEffect(event); // Efek gelombang
+    rippleEffect(event);
     document.getElementById('modalTitle').textContent = title;
     document.getElementById('modalDesc').textContent = desc;
     document.getElementById('detailModal').style.display = 'block';
