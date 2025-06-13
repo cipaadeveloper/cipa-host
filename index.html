@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Toko Online Saya</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+    }
+    header {
+      background: #4CAF50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .produk-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+    }
+    .produk {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin: 10px;
+      padding: 15px;
+      width: 280px;
+      text-align: center;
+    }
+    .produk img {
+      max-width: 100%;
+      border-radius: 10px;
+      height: auto;
+    }
+    .produk h3 {
+      margin: 10px 0 5px;
+    }
+    .produk p {
+      color: #555;
+    }
+    .btn {
+      display: inline-block;
+      background: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .btn:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Toko Online Saya</h1>
+  <p>Jualan produk digital & fisik langsung via WhatsApp</p>
+</header>
+
+<div class="produk-container">
+  <div class="produk">
+    <img src="https://via.placeholder.com/250x150?text=Produk+A" alt="Produk A" />
+    <h3>Produk A</h3>
+    <p>Rp50.000</p>
+    <a class="btn" href="https://wa.me/6281234567890?text=Halo%2C%20saya%20ingin%20beli%20Produk%20A" target="_blank">Beli via WhatsApp</a>
+  </div>
+
+  <div class="produk">
+    <img src="https://via.placeholder.com/250x150?text=Produk+B" alt="Produk B" />
+    <h3>Produk B</h3>
+    <p>Rp75.000</p>
+    <a class="btn" href="https://wa.me/6281234567890?text=Halo%2C%20saya%20ingin%20beli%20Produk%20B" target="_blank">Beli via WhatsApp</a>
+  </div>
+</div>
+
+</body>
+</html>
