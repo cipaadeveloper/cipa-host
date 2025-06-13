@@ -6,56 +6,78 @@
   <title>Toko Online Saya</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f4f4f4;
+      background: linear-gradient(135deg, #fceabb 0%, #f8b500 100%);
+      background-attachment: fixed;
+      color: #333;
     }
+
     header {
-      background: #4CAF50;
-      color: white;
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      color: #222;
       padding: 20px;
       text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
+
     .produk-container {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      padding: 20px;
+      padding: 30px;
+      gap: 20px;
     }
+
     .produk {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      margin: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
       padding: 15px;
       width: 280px;
       text-align: center;
+      transition: transform 0.2s ease;
     }
+
+    .produk:hover {
+      transform: translateY(-5px);
+    }
+
     .produk img {
       max-width: 100%;
       border-radius: 10px;
       height: auto;
     }
+
     .produk h3 {
-      margin: 10px 0 5px;
+      margin: 12px 0 8px;
+      font-size: 20px;
+      color: #222;
     }
+
     .produk p {
-      color: #555;
+      color: #444;
+      font-size: 16px;
     }
+
     .btn {
       display: inline-block;
-      background: #4CAF50;
+      background: #ff7f50;
       color: white;
       padding: 10px 15px;
       margin-top: 10px;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       text-decoration: none;
       font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: background 0.2s ease;
     }
+
     .btn:hover {
-      background: #45a049;
+      background: #ff6347;
     }
   </style>
 </head>
