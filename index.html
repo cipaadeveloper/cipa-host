@@ -43,16 +43,16 @@
     }
 
     .keranjang {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 12px;
-  font-weight: bold;
-  background: var(--card);
-  padding: 6px 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 12px;
+      font-weight: bold;
+      background: var(--card);
+      padding: 6px 10px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
 
     .produk-container {
       display: flex;
@@ -78,13 +78,14 @@
       transform: translateY(-5px);
     }
 
-   .produk img {
-  max-width: 100%;
-  max-height: 140px; , 
-  border-radius: 10px;
-  height: auto;
-  object-fit: cover;
-}
+    .produk img {
+      max-width: 100%;
+      max-height: 140px;
+      border-radius: 10px;
+      height: auto;
+      object-fit: cover;
+    }
+
     .produk h3 {
       margin: 12px 0 8px;
       font-size: 20px;
@@ -183,16 +184,16 @@
       font-size: 16px;
     }
 
-.checkout {
-  display: inline-block;
-  margin-top: 10px;
-  background: var(--btn);
-  color: white;
-  padding: 8px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 12px;
-}
+    .checkout {
+      display: inline-block;
+      margin-top: 10px;
+      background: var(--btn);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+    }
 
     .checkout:hover {
       background: var(--btn-hover);
@@ -211,31 +212,46 @@
   </header>
 
   <div class="produk-container">
-<div class="produk">
-  <img src="https://img1.pixhost.to/images/6453/610545685_imgtmp.jpg" alt="Bot WhatsApp" />
-  <h3>Reseller Panel</h3>
-  <p>Rp5.000</p>
-  <button class="btn" onclick="showModal(bisa jualan panel')">
-    Lihat Detail
-  </button>
-  <button class="btn" onclick="tambahKeranjang(5000)">+ Keranjang</button>
-  <a class="btn" href="https://wa.me/6288293058238?text=Saya%20ingin%20beli%20Bot%20WhatsApp" target="_blank">
-    Beli
-  </a>
-</div>
+    <!-- Produk 1 -->
+    <div class="produk">
+      <img src="https://img1.pixhost.to/images/6453/610545685_imgtmp.jpg" alt="Reseller Panel" />
+      <h3>Reseller Panel</h3>
+      <p>Rp5.000</p>
+      <button class="btn" onclick="showModal('Reseller Panel', 'Bisa jualan panel murah secara otomatis.', event)">Lihat Detail</button>
+      <button class="btn" onclick="tambahKeranjang(5000)">+ Keranjang</button>
+      <a class="btn" href="https://wa.me/6288293058238?text=Saya%20ingin%20beli%20Reseller%20Panel" target="_blank">Beli</a>
+    </div>
 
-<div class="produk">
-  <img src="https://img1.pixhost.to/images/6453/610545685_imgtmp.jpg" alt="Paket Hosting" />
-  <h3>Admin Panel</h3>
-  <p>Rp10.000</p>
-  <button class="btn" onclick="showModal('Paket Admin Panel [ Bisa jualan panel ] )">
-    Lihat Detail
-  </button>
-  <button class="btn" onclick="tambahKeranjang(10000)">+ Keranjang</button>
-  <a class="btn" href="https://wa.me/6288293058238?text=Saya%20ingin%20beli%20Paket%20Hosting" target="_blank">
-    Beli
-  </a>
-</div>
+    <!-- Produk 2 -->
+    <div class="produk">
+      <img src="https://img1.pixhost.to/images/6453/610545685_imgtmp.jpg" alt="Admin Panel" />
+      <h3>Admin Panel</h3>
+      <p>Rp10.000</p>
+      <button class="btn" onclick="showModal('Admin Panel', 'Paket Admin Panel [Bisa jualan panel dan mengatur user].', event)">Lihat Detail</button>
+      <button class="btn" onclick="tambahKeranjang(10000)">+ Keranjang</button>
+      <a class="btn" href="https://wa.me/6288293058238?text=Saya%20ingin%20beli%20Admin%20Panel" target="_blank">Beli</a>
+    </div>
+
+    <!-- Produk 3 -->
+    <div class="produk">
+      <img src="https://img1.pixhost.to/images/6453/610545685_imgtmp.jpg" alt="Owner Panel" />
+      <h3>Owner Panel</h3>
+      <p>Rp20.000</p>
+      <button class="btn" onclick="showModal('Owner Panel', 'Paket lengkap untuk menjadi owner panel (akses penuh).', event)">Lihat Detail</button>
+      <button class="btn" onclick="tambahKeranjang(20000)">+ Keranjang</button>
+      <a class="btn" href="https://wa.me/6288293058238?text=Saya%20ingin%20beli%20Owner%20Panel" target="_blank">Beli</a>
+    </div>
+
+    <!-- Produk 4 -->
+    <div class="produk">
+      <img src="https://img1.pixhost.to/images/6453/610545685_imgtmp.jpg" alt="PT Panel" />
+      <h3>PT Panel</h3>
+      <p>Rp25.000</p>
+      <button class="btn" onclick="showModal('PT Panel', 'Panel premium dengan label perusahaan (PT) untuk bisnis profesional.', event)">Lihat Detail</button>
+      <button class="btn" onclick="tambahKeranjang(25000)">+ Keranjang</button>
+      <a class="btn" href="https://wa.me/6288293058238?text=Saya%20ingin%20beli%20PT%20Panel" target="_blank">Beli</a>
+    </div>
+  </div>
 
   <!-- Modal -->
   <div id="detailModal" class="modal">
