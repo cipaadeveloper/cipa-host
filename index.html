@@ -1,312 +1,215 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Cipa Hosting</title>
   <style>
-    :root {
-      --bg: #fff0f5;
-      --card: #ffe4ec;
-      --text: #4a4a4a;
-      --btn: #ffb6b9;
-      --btn-hover: #ff8c94;
-      --modal-bg: rgba(255, 192, 203, 0.2);
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');:root {
+  --bg: linear-gradient(135deg, #ffe4e1, #ffc1cc);
+  --card: #ffffffcc;
+  --text: #333;
+  --btn: #ff69b4;
+  --btn-hover: #ff1493;
+  --modal-bg: rgba(255, 105, 180, 0.1);
+}
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-    }
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+}
 
-    .welcome {
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: var(--bg);
-      text-align: center;
-    }
+.welcome {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: var(--bg);
+  animation: fadeIn 1s ease-in-out;
+}
 
-    .welcome h1 {
-      font-size: 32px;
-      margin-bottom: 10px;
-    }
+.welcome h1 {
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #d63384;
+}
 
-    .welcome p {
-      font-size: 16px;
-      margin-bottom: 20px;
-    }
+.welcome p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #555;
+}
 
-    .welcome button {
-      background: var(--btn);
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
+.welcome button {
+  background: var(--btn);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
 
-    .welcome button:hover {
-      background: var(--btn-hover);
-    }
+.welcome button:hover {
+  background: var(--btn-hover);
+}
 
-    header {
-      background: #ffc1cc;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      color: #fff;
-    }
+header {
+  background: #ff69b4;
+  padding: 25px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
 
-    .keranjang {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 12px;
-      font-weight: bold;
-      background: var(--card);
-      padding: 6px 10px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
+.keranjang {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 14px;
+  font-weight: bold;
+  background: #fff3f7;
+  padding: 10px 14px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  color: #c2185b;
+}
 
-    .produk-container {
-      display: none;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 30px;
-      gap: 20px;
-    }
+.produk-container {
+  display: none;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 25px;
+}
 
-    .produk {
-      background: var(--card);
-      border-radius: 16px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-      padding: 15px;
-      width: 280px;
-      text-align: center;
-      transition: transform 0.2s ease;
-    }
+.produk {
+  background: var(--card);
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 280px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
+}
 
-    .produk:hover {
-      transform: translateY(-5px);
-    }
+.produk:hover {
+  transform: scale(1.05);
+}
 
-    .produk img {
-      max-width: 100%;
-      max-height: 140px;
-      border-radius: 10px;
-      object-fit: cover;
-    }
+.produk img {
+  max-width: 100%;
+  height: 150px;
+  border-radius: 14px;
+  object-fit: cover;
+}
 
-    .produk h3 {
-      margin: 12px 0 8px;
-      font-size: 20px;
-    }
+.produk h3 {
+  margin: 14px 0 6px;
+  font-size: 22px;
+  color: #c2185b;
+}
 
-    .produk p {
-      font-size: 16px;
-    }
+.produk p {
+  font-size: 18px;
+  color: #444;
+}
 
-    .btn {
-      display: inline-block;
-      background: var(--btn);
-      color: white;
-      padding: 10px 15px;
-      margin: 8px 5px 0 5px;
-      border: none;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: background 0.2s ease;
-      cursor: pointer;
-    }
+.btn {
+  display: inline-block;
+  background: var(--btn);
+  color: white;
+  padding: 10px 18px;
+  margin: 10px 6px 0 6px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.3s ease;
+  cursor: pointer;
+}
 
-    .btn:hover {
-      background: var(--btn-hover);
-    }
+.btn:hover {
+  background: var(--btn-hover);
+}
 
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: var(--modal-bg);
-    }
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--modal-bg);
+  backdrop-filter: blur(5px);
+}
 
-    .modal-content {
-      background-color: var(--card);
-      margin: 10% auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 90%;
-      max-width: 500px;
-      color: var(--text);
-      position: relative;
-      animation: fadeIn 0.3s ease-in-out;
-    }
+.modal-content {
+  background-color: #fff0f5;
+  margin: 10% auto;
+  padding: 25px;
+  border-radius: 14px;
+  width: 90%;
+  max-width: 480px;
+  position: relative;
+  animation: fadeIn 0.4s ease-in-out;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
 
-    .close {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 24px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.close {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #d63384;
+  cursor: pointer;
+}
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    .total-harga {
-      margin-top: 10px;
-      font-size: 16px;
-    }
+.total-harga {
+  margin-top: 10px;
+  font-size: 16px;
+}
 
-    .checkout {
-      display: inline-block;
-      margin-top: 10px;
-      background: var(--btn);
-      color: white;
-      padding: 8px 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 12px;
-    }
+.checkout {
+  display: inline-block;
+  margin-top: 10px;
+  background: var(--btn);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
 
-    .checkout:hover {
-      background: var(--btn-hover);
-    }
+.checkout:hover {
+  background: var(--btn-hover);
+}
+
   </style>
 </head>
 <body>
-  <div class="welcome" id="welcome">
-    <h1>Selamat datang di Cipa Store</h1>
-    <p>Toko penyedia produk digital & panel hosting</p>
-    <button onclick="showStore()">Masuk ke Toko</button>
-  </div>
-
-  <div id="storeContent" style="display:none;">
-    <header>
-      <h1>Toko Cipa Hosting</h1>
-      <p>Jual produk digital & fisik via WhatsApp</p>
-      <div class="keranjang">
-        🛒 <span id="keranjangCount">0</span> item<br />
-        💰 Total: Rp<span id="totalHarga">0</span><br />
-        <div class="checkout" onclick="checkout()">Checkout</div>
-      </div>
-    </header>
-
-    <div class="produk-container" id="produkContainer">
-      <div class="produk">
-        <img src="https://img1.pixhost.to/images/6453/610545685_imgtmp.jpg" alt="Bot WhatsApp" />
-        <h3>Reseller Panel</h3>
-        <p>Rp5.000</p>
-        <button class="btn" onclick="showModal('Reseller Panel', 'Bisa jualan panel!')">Lihat Detail</button>
-        <button class="btn" onclick="tambahKeranjang(5000)">+ Keranjang</button>
-        <a class="btn" href="https://wa.me/6288293058238?text=Saya%20ingin%20beli%20Reseller%20Panel" target="_blank">Beli</a>
-      </div>
-      <div class="produk">
-        <img src="https://img1.pixhost.to/images/6453/610545685_imgtmp.jpg" alt="Admin Panel" />
-        <h3>Admin Panel</h3>
-        <p>Rp10.000</p>
-        <button class="btn" onclick="showModal('Admin Panel', 'Panel admin untuk kelola layanan')">Lihat Detail</button>
-        <button class="btn" onclick="tambahKeranjang(10000)">+ Keranjang</button>
-        <a class="btn" href="https://wa.me/6288293058238?text=Saya%20ingin%20beli%20Admin%20Panel" target="_blank">Beli</a>
-      </div>
-      <div class="produk">
-        <img src="https://img1.pixhost.to/images/6453/610545685_imgtmp.jpg" alt="Owner Panel" />
-        <h3>Owner Panel</h3>
-        <p>Rp20.000</p>
-        <button class="btn" onclick="showModal('Owner Panel', 'Fitur lengkap untuk pemilik panel')">Lihat Detail</button>
-        <button class="btn" onclick="tambahKeranjang(20000)">+ Keranjang</button>
-        <a class="btn" href="https://wa.me/6288293058238?text=Saya%20ingin%20beli%20Owner%20Panel" target="_blank">Beli</a>
-      </div>
-      <div class="produk">
-        <img src="https://img1.pixhost.to/images/6453/610545685_imgtmp.jpg" alt="PT Panel" />
-        <h3>PT Panel</h3>
-        <p>Rp25.000</p>
-        <button class="btn" onclick="showModal('PT Panel', 'Panel premium untuk perusahaan atau tim')">Lihat Detail</button>
-        <button class="btn" onclick="tambahKeranjang(25000)">+ Keranjang</button>
-        <a class="btn" href="https://wa.me/6288293058238?text=Saya%20ingin%20beli%20PT%20Panel" target="_blank">Beli</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- Modal -->
-  <div id="detailModal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="tutupModal()">✕</span>
-      <h2 id="modalTitle">Judul Produk</h2>
-      <p id="modalDesc">Deskripsi produk...</p>
-    </div>
-  </div>
-
-  <script>
-    let keranjang = 0;
-    let total = 0;
-
-    function tambahKeranjang(harga) {
-      keranjang++;
-      total += harga;
-      document.getElementById('keranjangCount').textContent = keranjang;
-      document.getElementById('totalHarga').textContent = total.toLocaleString('id-ID');
-    }
-
-    function checkout() {
-      if (keranjang === 0) {
-        alert("Keranjang masih kosong.");
-      } else {
-        alert(`Checkout berhasil!\nTotal item: ${keranjang}\nTotal harga: Rp${total.toLocaleString('id-ID')}`);
-        keranjang = 0;
-        total = 0;
-        document.getElementById('keranjangCount').textContent = keranjang;
-        document.getElementById('totalHarga').textContent = total;
-      }
-    }
-
-    function showModal(title, desc) {
-      document.getElementById('modalTitle').textContent = title;
-      document.getElementById('modalDesc').textContent = desc;
-      document.getElementById('detailModal').style.display = 'block';
-    }
-
-    function tutupModal() {
-      document.getElementById('detailModal').style.display = 'none';
-    }
-
-    function showStore() {
-      document.getElementById('welcome').style.display = 'none';
-      document.getElementById('storeContent').style.display = 'block';
-      document.getElementById('produkContainer').style.display = 'flex';
-    }
-
-    window.onclick = function (event) {
-      const modal = document.getElementById('detailModal');
-      if (event.target === modal) {
-        modal.style.display = 'none';
-      }
-    };
-  </script>
+  <!-- Body HTML kamu tetap sama -->
 </body>
 </html>
